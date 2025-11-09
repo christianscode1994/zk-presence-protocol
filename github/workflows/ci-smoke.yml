@@ -1,0 +1,38 @@
+name: CI Smoke
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install pnpm
+        run: npm i -g pnpm
+
+      - name: Create pnpm workspace file
+        run: |
+          if [ ! -f pnpm-workspace.yaml ]; then
+            echo "packages:" > pnpm-workspace.yaml
+            echo "  - 'apps/*'" >> pnpm-workspace.yaml
+          fi
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build web
+        working-directory: ./apps/web
+        run: pnpm build
+
+      - name: Run smoke API tests
+        run: node apps/web/scripts/smoke-test.js
