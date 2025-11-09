@@ -1,0 +1,15 @@
+{
+  "name": "zk_presence_protocol",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:web": "pnpm --filter @zk-presence/web dev",
+    "build:web": "pnpm --filter @zk-presence/web build",
+    "start:web": "pnpm --filter @zk-presence/web start",
+    "lint": "echo \"No lint configured\""
+  },
+  "devDependencies": {}
+}
