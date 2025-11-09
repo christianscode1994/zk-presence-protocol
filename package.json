@@ -6,10 +6,10 @@
     "apps/*"
   ],
   "scripts": {
+    "install:all": "pnpm install",
     "dev:web": "pnpm --filter @zk-presence/web dev",
     "build:web": "pnpm --filter @zk-presence/web build",
     "start:web": "pnpm --filter @zk-presence/web start",
-    "lint": "echo \"No lint configured\""
-  },
-  "devDependencies": {}
+    "ci:build": "pnpm install && pnpm build:web"
+  }
 }
