@@ -2,7 +2,7 @@ import React from "react";
 import EventCreator from "../components/EventCreator";
 import CheckinForm from "../components/CheckinForm";
 import RootsList from "../components/RootsList";
-import "../styles/globals.css";
+
 
 export default function Home() {
   return (
