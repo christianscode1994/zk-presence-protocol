@@ -1,0 +1,27 @@
+# 1. Ensure Node matches your project's engines (v22.x recommended)
+node --version
+
+# 2. Create workspace files if missing
+cat > pnpm-workspace.yaml <<'YAML'
+packages:
+  - "apps/*"
+YAML
+
+cat > .npmrc <<'NPMRC'
+registry=https://registry.npmjs.org/
+fetch-retries=2
+fetch-retry-factor=1
+strict-ssl=true
+NPMRC
+
+# 3. Install pnpm and create pnpm-lock.yaml
+npm i -g pnpm@8
+pnpm install
+
+# 4. Verify lockfile created
+ls -la pnpm-lock.yaml pnpm-workspace.yaml .npmrc
+
+# 5. Commit and push
+git add pnpm-lock.yaml pnpm-workspace.yaml .npmrc
+git commit -m "Add pnpm workspace, lockfile and .npmrc for CI"
+git push origin $(git branch --show-current)
