@@ -1,2 +1,4 @@
+cat > pnpm-workspace.yaml <<'YAML'
 packages:
-  - 'apps/*'
+  - "apps/*"
+YAML
