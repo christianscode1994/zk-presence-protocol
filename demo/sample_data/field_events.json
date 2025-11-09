@@ -1,0 +1,9 @@
+[
+  {
+    "eventId": "event-demo-1",
+    "organizer": "organizer1",
+    "startTs": 1700000000000,
+    "endTs": 1700003600000,
+    "metadata": "Demo event"
+  }
+]
