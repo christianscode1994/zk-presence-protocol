@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  build-and-smoke:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,10 +17,12 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
-      - name: Install pnpm
-        run: npm i -g pnpm
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
 
-      - name: Create pnpm workspace file
+      - name: Create pnpm workspace file if missing
         run: |
           if [ ! -f pnpm-workspace.yaml ]; then
             echo "packages:" > pnpm-workspace.yaml
@@ -32,7 +34,35 @@ jobs:
 
       - name: Build web
         working-directory: ./apps/web
+        env:
+          NEXT_PUBLIC_APP_NAME: "ZK Presence Prototype"
+          NEXT_PUBLIC_SUPPORT_EMAIL: "security@example.com"
         run: pnpm build
 
+      - name: Start built Next server
+        working-directory: ./apps/web
+        env:
+          NEXT_PUBLIC_APP_NAME: "ZK Presence Prototype"
+          NEXT_PUBLIC_SUPPORT_EMAIL: "security@example.com"
+          RELAYER_API_KEY: ${{ secrets.RELAYER_API_KEY }}
+        run: |
+          pnpm start &> server.log &
+          echo $! > .next-server.pid
+
+      - name: Wait for server to be ready (wait-on)
+        working-directory: ./apps/web
+        run: |
+          pnpm dlx wait-on http://localhost:3000/api/status --timeout 30000
+
       - name: Run smoke API tests
-        run: node apps/web/scripts/smoke-test.js
+        working-directory: ./apps/web
+        run: node scripts/smoke-test.js
+
+      - name: Stop Next server
+        if: always()
+        working-directory: ./apps/web
+        run: |
+          if [ -f .next-server.pid ]; then
+            kill $(cat .next-server.pid) || true
+            rm .next-server.pid
+          fi
