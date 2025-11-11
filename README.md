@@ -1,3 +1,28 @@
+# zk-presence-protocol
+
+Zero‑knowledge presence protocol for privacy‑preserving check‑ins and verifiable attendance
+
+---
+
+## 🏷️ Tagline
+Privacy‑first attendance and presence proofs anchored on Polkadot parachains.
+
+
+## 🚀 Live Demo
+👉 https://zk-presence-protocol-web-g5b7.vercel.app/
+
+---
+
+## 🔗 On‑chain Anchors (Westend)
+We anchored a demo Merkle root to the Westend testnet.
+
+- **Tx hash:** 0xREPLACE_WITH_YOUR_TX_HASH  
+- **Explorer:** https://westend.subscan.io/extrinsic/0xREPLACE_WITH_YOUR_TX_HASH  
+
+*(Optional: add a screenshot of the Subscan page here for extra clarity.)*
+
+---
+
 zk-presence-protocol
 Zero-knowledge presence protocol for privacy-preserving check-ins and verifiable attendance
 
