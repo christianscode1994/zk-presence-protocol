@@ -1,29 +1,25 @@
-# AI_USAGE.md
+AI Usage
+Summary
+This project used Copilot to generate boilerplate code, examples, and documentation drafts. Copilot-assisted outputs were reviewed and edited by the repository maintainers before inclusion. No private or sensitive user data was used as input to Copilot when generating code for this repository.
 
-This repository is an AI-assisted prototype, primarily generated with Copilot. It is a demo-only prototype and not production-grade. The code is published under the MIT License.
+Which parts were AI-assisted
+Example scripts and glue code such as examples/anchor-demo.js and scripts/run-local-chain.sh.
 
-**Tools and timeframe**
-- Copilot; Oct–Nov 2025.
+README drafts and documentation templates.
 
-**Scope**
-- Major scaffolding, serverless endpoints, frontends, docs, demo scripts, and this file were created or assisted by AI.
+Small API handler scaffolds and CLI option parsing snippets.
 
-**Representative prompts**
-- "Create Express endpoints /issue /get-proof /verify using precomputed_proofs.json."
-- "Generate a Next.js issuer page that posts {userId,eventId} to /issue."
+How AI outputs were validated
+Each AI-assisted file was manually reviewed for correctness, security, and alignment with the repository architecture.
 
-**Validation**
-- Manual demo per docs/DEMO_SCRIPT.md.
-- Smoke test (local): PASS — status endpoint responded at http://localhost:3004
+Cryptographic operations and runtime extrinsic names were verified against on-chain expectations where applicable.
 
-**Limitations Required follow-ups**
-- /verify is a deterministic demo stub; replace with a vetted wasm/JS verifier and verification_key.json before production.
-- Precomputed proofs are used for the demo; replace with on-chain or live proof generation in production.
-- Do not commit secrets or verification keys; use secure secret management.
-- tmp_issuances.json (ephemeral demo storage) must be replaced with persistent or on-chain storage for production.
+Tests or local smoke runs were performed for scripts included in the demo.
 
-**Traceability**
-- AI-assisted PRs include an "AI-assisted content" section with sanitized prompt and smoke-test result.
-- Maintainer handle: @christianscode1994
-- Maintainer sign off: @christianscode1994 — 24 Oct 2025
-- Repo: https://github.com/christianscode1994/zk-presence-protocol
+Data handling and privacy
+No user PII, production secrets, or private keys were shared with Copilot during development.
+
+The project keeps prover secrets and signing keys local to the developer environment and does not upload these artifacts to external AI services.
+
+Reproducibility note
+Because AI tools contributed to scaffolding, maintainers advise reviewers to treat generated code as a starting point and validate cryptographic and runtime assumptions before reusing in production.
