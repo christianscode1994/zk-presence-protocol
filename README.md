@@ -87,6 +87,6 @@ Deploy the pallet to a Polkadot Cloud preview or Westend and include anchored tx
 Improve UX and hardened key handling, add rate limits and audit logging.
 
 Contact and contributors
-Repository maintainer: christian (see GitHub profile)
+Repository maintainer: christianscode1994 (see GitHub profile)
 
 Report issues: open a GitHub Issue labeled "security" for vulnerabilities.
