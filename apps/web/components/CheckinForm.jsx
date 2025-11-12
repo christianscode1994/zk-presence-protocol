@@ -23,14 +23,15 @@ export default function CheckinForm() {
       return;
     }
     const proof = `valid:${eventId}:${nonce}`;
-    const res = await fetch("/apps/web/api/checkin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-relayer-key": process.env.NEXT_PUBLIC_RELAYER_KEY || ""
-      },
-      body: JSON.stringify({ eventId, commitment, proof })
-    });
+    const res = await fetch("/api/checkin", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    // remove x-relayer-key from client; server should add it
+  },
+  body: JSON.stringify({ eventId, commitment, proof })
+});
+
     const j = await res.json();
     setResult(j);
   }
